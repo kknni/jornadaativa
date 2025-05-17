@@ -15,7 +15,7 @@ public class Usuario {
 	private String nome ;
 	private String email ;
 	private String senha ;
-	private String foto_perfil;
+	private String fotoPerfil;
 
 	public Usuario() {
 	}
@@ -52,17 +52,19 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public String getFoto_perfil() {
-		return foto_perfil;
+
+	
+	public String getFotoPerfil() {
+		return fotoPerfil;
 	}
 
-	public void setFoto_perfil(String foto_perfil) {
-		this.foto_perfil = foto_perfil;
+	public void setFotoPerfil(String fotoPerfil) {
+		this.fotoPerfil = fotoPerfil;
 	}
-	
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(new Object[] { id, nome, email, senha, foto_perfil });
+		return Objects.hash(new Object[] { id, nome, email, senha, fotoPerfil });
 	}
 	
 	@Override
@@ -76,12 +78,12 @@ public class Usuario {
 		Usuario other = (Usuario) obj;
 		return Objects.equals(id, other.id) && Objects.equals(nome, other.nome)
 				&& Objects.equals(email, other.email) && Objects.equals(senha, other.senha)
-				&& Objects.equals(foto_perfil, other.foto_perfil);
+				&& Objects.equals(fotoPerfil, other.fotoPerfil);
 	}
 
 	@Override
 	public String toString() {
-		return "Produto [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", foto_perfil=" + foto_perfil + "]";
+		return "Produto [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", fotoPerfil=" + fotoPerfil + "]";
 	}
 }
 

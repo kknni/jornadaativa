@@ -62,7 +62,7 @@ public class ProvaController {
 				.body(prova);
 	}
 	
-	//curl -X PUT http://localhost:8080/provas/1 -H "Content-Type: application/json; Charset=utf-8" -d @atualiza-prova.json
+	//curl -X PUT http://localhost:8080/provas/{1} -H "Content-Type: application/json; Charset=utf-8" -d @atualiza-prova.json
 	@PutMapping("/provas/{id}")
 	public ResponseEntity<Object> atualizarProva(
 			@PathVariable Integer id,
