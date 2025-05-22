@@ -47,7 +47,7 @@ public class ProvaController {
 	}
 	
 	
-	//curl POST 	 -H "Content-Type: application/json; Charset=utf-8" -d @nova-prova.json 
+	//curl -X POST http://localhost:8080/provas -H "Content-Type: application/json; Charset=utf-8" -d @nova-prova.json 
 	
 	@PostMapping("/provas")
 	public ResponseEntity<Prova> criarProva(
@@ -62,7 +62,9 @@ public class ProvaController {
 				.body(prova);
 	}
 	
-	//curl -X PUT http://localhost:8080/provas/1 -H "Content-Type: application/json; Charset=utf-8" -d @atualiza-prova.json
+
+	//curl -X PUT http://localhost:8080/provas/{id} -H "Content-Type: application/json; Charset=utf-8" -d @atualiza-prova.json
+
 	@PutMapping("/provas/{id}")
 	public ResponseEntity<Object> atualizarProva(
 			@PathVariable Integer id,
@@ -84,7 +86,7 @@ public class ProvaController {
 				.body("Produto atualizado com sucesso!");
 	}
 	
-	//curl -X  http://localhost:8080/provas/1/deletar -H "Content-Type: application/json; Charset=utf-8" -d @deleta-prova.json
+	//curl -X DELETE  http://localhost:8080/provas/{id}/deletar -H "Content-Type: application/json; Charset=utf-8" -d @atualiza-prova.json
 	@DeleteMapping("/provas/{id}/deletar")
 	public ResponseEntity<Object> deletarProva(
 			@PathVariable Integer id){
