@@ -1,4 +1,4 @@
-package br.com.belval.api.jornadaativa.Controller;
+package br.com.belval.api.jornadaativa.controller;
 
 import java.util.Optional;
 
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.belval.api.jornadaativa.Model.Treino;
-import br.com.belval.api.jornadaativa.Repository.TreinoRepository;
+import br.com.belval.api.jornadaativa.model.Treino;
+import br.com.belval.api.jornadaativa.repository.TreinoRepository;
 
 @RestController
 public class TreinoController {
@@ -47,6 +47,7 @@ public class TreinoController {
 	public ResponseEntity<Treino> criarTreino(
 			@RequestBody Treino treino) {
 		
+		//curl POST 	 -H "Content-Type: application/json; Charset=utf-8" -d @novotreino.json
 		
 		System.out.println("Treino criado ..." + treino.toString());
 		repository.save(treino);
@@ -61,7 +62,7 @@ public class TreinoController {
 	public ResponseEntity<Object> atualizarTreino(
 			@PathVariable Integer id,
 			@RequestBody Treino prod){
-		
+		//curl -X PUT http://localhost:8080/provas/1 -H "Content-Type: application/json; Charset=utf-8" -d @atualizartreino
 		Optional<Treino> treino = repository.findById(id);
 		
 		if (treino.isEmpty()) {
@@ -82,7 +83,7 @@ public class TreinoController {
 	@DeleteMapping("/treinos/{id}/deletar")
 	public ResponseEntity<Object> deletarTreino(
 			@PathVariable Integer id){
-		
+		//curl -X  http://localhost:8080/provas/id/deletar -H "Content-Type: application/json; Charset=utf-8" -d @atualizartreino.json
 		Optional<Treino> treinoOptional = repository.findById(id);
 		
 		if (treinoOptional.isEmpty()) {

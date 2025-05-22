@@ -1,4 +1,4 @@
-package br.com.belval.api.jornadaativa.Model;
+package br.com.belval.api.jornadaativa.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -12,8 +12,7 @@ import jakarta.persistence.Id;
 @Entity
 public class Treino {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY
-	)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private Double distancia;
 	private LocalDate data;
@@ -49,25 +48,25 @@ public class Treino {
 	public void setTempo(LocalTime tempo) {
 		this.tempo = tempo;
 	}
-@Override
-public int hashCode() {
-	return Objects.hash(new Object[] { id, distancia, data, tempo });
-}
-   
-@Override
-public boolean equals(Object obj) {
-	if (this == obj) {
-		return true;
-	} else if (obj == null) {
-		return false;
-	} else if (this.getClass() != obj.getClass()) {
-		return false;
-	} else {
-		Treino other = (Treino) obj;
-		return Objects.equals(id, other.id) && Objects.equals(distancia, other.distancia)
-				&& Objects.equals(tempo, other.tempo) && Objects.equals(data, other.data);
+	@Override
+	public int hashCode() {
+		return Objects.hash(new Object[] { id, distancia, data, tempo });
 	}
-}
+	   
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		} else if (obj == null) {
+			return false;
+		} else if (this.getClass() != obj.getClass()) {
+			return false;
+		} else {
+			Treino other = (Treino) obj;
+			return Objects.equals(id, other.id) && Objects.equals(distancia, other.distancia)
+					&& Objects.equals(tempo, other.tempo) && Objects.equals(data, other.data);
+		}
+	}
 	
 	@Override
 	public String toString() {

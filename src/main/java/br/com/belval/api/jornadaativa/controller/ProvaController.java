@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.belval.api.jornadaativa.Model.Prova;
-import br.com.belval.api.jornadaativa.Repository.ProvaRepository;
+import br.com.belval.api.jornadaativa.model.Prova;
+import br.com.belval.api.jornadaativa.repository.ProvaRepository;
 
 @RestController
 public class ProvaController {
