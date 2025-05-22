@@ -5,18 +5,20 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.belval.api.jornadaativa.model.Usuario;
 import br.com.belval.api.jornadaativa.repository.UsuarioRepository;
 
 @RestController
+@RequestMapping
 public class UsuarioController {
 
 	@Autowired
@@ -48,7 +50,7 @@ public class UsuarioController {
 	}
 	
 	
-	// curl POST http://localhost:8080/usuarios -H "Content-Type: application/json; Charset=utf-8" -d @novo-usuario.json
+	// curl -X POST http://localhost:8080/usuarios -H "Content-Type: application/json; Charset=utf-8" -d @novo-usuario.json
 	
 	@PostMapping("/usuarios")
 	public ResponseEntity<Usuario> criaUsuario(
@@ -63,7 +65,7 @@ public class UsuarioController {
 				.body(usuario);
 	}
 	
-	// curl -X PUT http://localhost:8080/usuarios/{1} -H "Content-Type: application/json; Charset=utf-8" -d @atualizar-usuario.json
+	// curl -X PUT http://localhost:8080/usuarios/1 -H "Content-Type: application/json; Charset=utf-8" -d @atualizar-usuario.json
 	@PutMapping("/usuarios/{id}")
 	public ResponseEntity<Object> atualizarUsuario(
 			@PathVariable Integer id,
@@ -86,24 +88,23 @@ public class UsuarioController {
 				.body("Usuario atualizado com sucesso!");
 	}
 	
-	//curl -X DELETE http://localhost:8080/usuarios/{1}/deletar -H "Content-Type: application/json; Charset=utf-8" -d @atualizar-usuario.json
-	@DeleteMapping("/usuarios/id/deletar")
-	public ResponseEntity<Object> deletarProva(
-			@PathVariable Integer id){
-		
-		Optional<Usuario> usuarioOptional = repository.findById(id);
-		
-		if (usuarioOptional.isEmpty()) {
-			return ResponseEntity
-					.status(HttpStatus.NOT_FOUND)
-					.body("Usuario não encontrada!");
-		}
-		
-		Usuario usuario = usuarioOptional.get();
-		repository.delete(usuario);
-		
-		return ResponseEntity
-				.status(HttpStatus.OK)
-				.body("Usuario deletado com sucesso!");
+	// curl -X DELETE http://localhost:8080/usuarios/1 -H "Content-Type: application/json; Charset=utf-8" -d @atualizar-usuario.json
+	@RequestMapping(value = "/usuarios/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Object> deletarUsuario(@PathVariable Integer id) {
+	    Optional<Usuario> usuarioOptional = repository.findById(id);
+
+	    if (usuarioOptional.isEmpty()) {
+	        return ResponseEntity
+	                .status(HttpStatus.NOT_FOUND)
+	                .body("Usuário não encontrado!");
+	    }
+
+	    Usuario usuario = usuarioOptional.get();
+	    repository.delete(usuario);
+
+	    return ResponseEntity
+	            .status(HttpStatus.OK)
+	            .body("Usuário deletado com sucesso!");
 	}
+
 }
