@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,11 +29,12 @@ public class tipotreinoController {
 				.body(repository.findAll());
 	}
 	
-	@GetMapping("/tipotreino/{idtipoTreino}")
+	@GetMapping("/tipoTreino/{idtipoTreino}")
 	public ResponseEntity<Object> buscarPoridtipoTreino(
-			@PathVariable(value = "caminhada") Integer idtipoTreino){
+			@PathVariable(value = "id") Integer idtipoTreino){
 		
 		Optional<tipoTreino> tipoTreino = repository.findById(idtipoTreino);
+		
 		
 		if (tipoTreino.isPresent()) {
 			return ResponseEntity
@@ -44,7 +46,7 @@ public class tipotreinoController {
 				.body("tipoTreino não encontrada");
 	}
 	
-	//curl POST 	 -H "Content-Type: application/json; Charset=utf-8" -d @novaTipoTreino.json 
+	//curl -X POST 	http://localhost:8080/tipoTreino -H "Content-Type: application/json; Charset=utf-8" -d @NovoTipoTreino.json
 	@PostMapping("/tipoTreino")
 	public ResponseEntity<tipoTreino> criartipoTreino(
 			@RequestBody tipoTreino tipoTreino){
@@ -57,9 +59,9 @@ public class tipotreinoController {
 				.body(tipoTreino);
 	}
 	
-	//curl -X PUT http://localhost:8080/provas/1 -H "Content-Type: application/json; Charset=utf-8" -d @atualizarTipoTreino.json
+	//curl -X PUT http://localhost:8080/tipoTreino/1 -H "Content-Type: application/json; Charset=utf-8" -d @atualizarTipoTreino.json
 	
-	@PostMapping("/tipoTreino/{idtipoTreino}")
+	@PutMapping("/tipoTreino/{idtipoTreino}")
 	public ResponseEntity<Object> atualizartipoTreino(
 			@PathVariable Integer idtipoTreino,
 			@RequestBody tipoTreino prod){
@@ -80,8 +82,8 @@ public class tipotreinoController {
 				.body("produo atualizado com sucesso!");
 	}
 	
-	//curl -X  http://localhost:8080/provas/{id}/deletar -H "Content-Type: application/json; Charset=utf-8" -d @deletarTipoTreino.json
-	@DeleteMapping("/tipotreino/{idtipoTreino}/deletar")
+	//curl -X DELETE  http://localhost:8080/tipoTreino/{id}/deletar -H "Content-Type: application/json; Charset=utf-8" -d @NovoTipoTreino.json
+	@DeleteMapping("/tipoTreino/{idtipoTreino}/deletar")
 	public ResponseEntity<Object> deletartipoTreino(
 			@PathVariable Integer idtipoTreino){
 		
