@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.belval.api.jornadaativa.model.Prova;
 import br.com.belval.api.jornadaativa.repository.ProvaRepository;
 
+
+@RestController
 public class ProvaController {
 	
 	@Autowired
