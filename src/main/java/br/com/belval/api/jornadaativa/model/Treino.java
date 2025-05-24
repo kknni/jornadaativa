@@ -1,7 +1,6 @@
 package br.com.belval.api.jornadaativa.model;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
@@ -16,7 +15,7 @@ public class Treino {
 	private Integer id;
 	private Double distancia;
 	private LocalDate data;
-	private LocalTime tempo;
+	private String tempo;
 	
 	public Treino() {
 	}
@@ -41,11 +40,11 @@ public class Treino {
 	public void setData(LocalDate data) {
 		this.data = data;
 	}
-	public LocalTime getTime() {
+	public String getTime() {
 		return tempo;
 		
 	}
-	public void setTempo(LocalTime tempo) {
+	public void String (String tempo) {
 		this.tempo = tempo;
 	}
 	@Override
