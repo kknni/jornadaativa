@@ -47,13 +47,25 @@ public class TipoProva {
         this.nome = nome;
  
     }
-    public Double getMaratona() {
-    	return maratona;
-    }
-    public Double getMeiaMaratona() {
-    	return meiamaratona;
-    }
-    public Double getMetrosRasos() {
-    	return metrosrasos;
-    }
+	public Double getMaratona() {
+		return maratona;
+	}
+	public void setMaratona(Double maratona) {
+		this.maratona = maratona;
+	}
+	
+	public Double getMeiamaratona() {
+		return meiamaratona;
+	}
+	public void setMeiamaratona(Double meiamaratona) {
+		this.meiamaratona = meiamaratona;
+	}
+	
+	public Double getMetrosrasos() {
+		return metrosrasos;
+	}
+	public void setMetrosrasos(Double metrosrasos) {
+		this.metrosrasos = metrosrasos;
+	}
+    
 }
