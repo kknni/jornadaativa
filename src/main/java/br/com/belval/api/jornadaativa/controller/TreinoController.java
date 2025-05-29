@@ -59,7 +59,7 @@ public class TreinoController {
 				.body(treino);
 	}
 	
-	//curl -X PUT http://localhost:8080/treinos/1 -H "Content-Type: application/json; Charset=utf-8" -d @atualizartreino.json
+	//curl -X PUT http://localhost:8080/treinos/{id} -H "Content-Type: application/json; Charset=utf-8" -d @atualizartreino.json
 	@PutMapping("/treinos/{id}")
 	public ResponseEntity<Object> atualizarTreino(
 			@PathVariable Integer id,
@@ -81,7 +81,7 @@ public class TreinoController {
 				.body("Treino atualizado com sucesso!");
 	}
 	
-// curl -X DELETE http://localhost:8080/treinos/1 -H "Content-Type: application/json; Charset=utf-8" -d @atualizartreino.json
+// curl -X DELETE http://localhost:8080/treinos/1
 	@DeleteMapping("/treinos/{id}")
 	public ResponseEntity<Object> deletarTreino(
 			@PathVariable Integer id){

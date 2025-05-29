@@ -15,7 +15,7 @@ public class Treino {
 	private Integer id;
 	private Double distancia;
 	private LocalDate data;
-	private String tempo;
+	private Long tempo;
 	
 	public Treino() {
 	}
@@ -40,11 +40,11 @@ public class Treino {
 	public void setData(LocalDate data) {
 		this.data = data;
 	}
-	public String getTime() {
+	public Long getTempo() {
 		return tempo;
 		
 	}
-	public void String (String tempo) {
+	public void Long (Long tempo) {
 		this.tempo = tempo;
 	}
 	@Override
