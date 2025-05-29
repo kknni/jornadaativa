@@ -13,44 +13,39 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.belval.api.jornadaativa.model.Prova;
 import br.com.belval.api.jornadaativa.model.TipoProva;
 import br.com.belval.api.jornadaativa.repository.TipoProvaRepository;
 
 @RestController
-
 public class TipoProvaController {
 
 	@Autowired
-
 	private TipoProvaRepository repository;
 
 	@GetMapping("/tipoprovas")
-
 	public ResponseEntity<Iterable<TipoProva>> obterTipoProva() {
-
 		return ResponseEntity
-
 				.status(HttpStatus.OK)
-
 				.body(repository.findAll());
 
 	}
 
-	@GetMapping("/tipoprova/{id}")
-
-	public ResponseEntity<Object> buscarPorId(@PathVariable Integer id) {
+	@GetMapping("/tipoprovas/{id}")
+	public ResponseEntity<Object> buscarPorid(
+			@PathVariable(value = "id") Integer id){
 
 		Optional<TipoProva> tipoProva = repository.findById(id);
 
-		if (tipoProva.isEmpty()) {
-
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tipo Prova não encontrada");
-
+		if (tipoProva.isPresent()) {
+			return ResponseEntity
+					.status(HttpStatus.OK)
+					.body(tipoProva.get());
 		}
 
-		TipoProva entidade = tipoProva.get();
-
-		return ResponseEntity.status(HttpStatus.OK).body(entidade);
+		return ResponseEntity
+				.status(HttpStatus.NOT_FOUND)
+				.body("Prova não encontrada");
 
 	}
 	
@@ -58,48 +53,41 @@ public class TipoProvaController {
 
 
 	@PostMapping("/tipoprovas")
-
-	public ResponseEntity<TipoProva> criarTipoProva(@RequestBody TipoProva tipoProva) {
-
+	public ResponseEntity<TipoProva> criarTipoProva(
+			@RequestBody TipoProva tipoProva) {
+		
+		System.out.println("TipoProva criado..." + tipoProva.toString());
 		repository.save(tipoProva);
-
+		
 		return ResponseEntity
-
 				.status(HttpStatus.CREATED)
-
 				.body(tipoProva);
 
 	}
 	
-	//curl -X PUT http://localhost:8080/tipoprova/{id} -H "Content-Type: application/json; Charset=utf-8" -d @atualizar-tipoprova.json
+	//curl -X PUT http://localhost:8080/tipoprovas/1 -H "Content-Type: application/json; Charset=utf-8" -d @atualizar-tipoprova.json
 
 
-	@PutMapping("/tipoprova/{id}")
+	@PutMapping("/tipoprovas/{id}")
+	public ResponseEntity<Object> atualizarTipoProva(
+			@PathVariable Integer id,
+			@RequestBody TipoProva prod) {
 
-	public ResponseEntity<Object> atualizarTipoProva(@PathVariable Integer id,
-			@RequestBody TipoProva tipoProvaAtualizada) {
+		Optional<TipoProva> tipoProva = repository.findById(id);
 
-		Optional<TipoProva> tipoProvaOptional = repository.findById(id);
-
-		if (tipoProvaOptional.isEmpty()) {
-
+		if (tipoProva.isEmpty()) {
 			return ResponseEntity
-
 					.status(HttpStatus.NOT_FOUND)
-
 					.body("Tipo Prova não encontrada");
 
 		}
 
-		tipoProvaAtualizada.setId(id);
-
-		repository.save(tipoProvaAtualizada);
-
+		prod.setId(id);
+		repository.save(prod);
+		
 		return ResponseEntity
-
 				.status(HttpStatus.OK)
-
-				.body("Tipo Prova atualizada com sucesso!");
+				.body("Tipo Prova atualizado com sucesso!");
 
 	}
 	
@@ -107,27 +95,23 @@ public class TipoProvaController {
 
 
 	@DeleteMapping("/tipoprova/{id}/deletar")
-
-	public ResponseEntity<Object> deletarTipoProva(@PathVariable Integer id) {
+	public ResponseEntity<Object> deletarTipoProva(
+			@PathVariable Integer id) {
 
 		Optional<TipoProva> tipoProvaOptional = repository.findById(id);
 
 		if (tipoProvaOptional.isEmpty()) {
-
 			return ResponseEntity
-
 					.status(HttpStatus.NOT_FOUND)
-
 					.body("Tipo Prova não encontrada");
 
 		}
-
-		repository.delete(tipoProvaOptional.get());
-
+		
+		TipoProva tipoprova = tipoProvaOptional.get();
+		repository.delete(tipoprova);
+		
 		return ResponseEntity
-
 				.status(HttpStatus.OK)
-
 				.body("Tipo Prova deletada com sucesso!");
 
 	}
